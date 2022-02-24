@@ -1,0 +1,26 @@
+{
+  "name": "exadel-tf-lite",
+  "version": "0.0.1",
+  "cordova_name": "ApperyioML",
+  "description": "",
+  "cordova": {
+    "id": "exadel-tf-lite",
+    "platforms": [
+    "ios"
+    ]
+
+  },
+  
+  "engines": [
+      {
+          "name": "cordova",
+          "version": ">=5.0.0"
+      }
+  ],
+  
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "",
+  "license": "ISC"
+}

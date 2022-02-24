@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="exadel-tf-lite" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>ApperyioML</name>
+    <js-module name="ApperyioML" src="www/ApperyioML.js">
+        <clobbers target="ApperyioML" />
+    </js-module>
+    
+    <hook type="before_plugin_install" src="src/add-swift-support.js" />
+
+    <platform name="ios">
+        
+    <hook type="after_platform_add" src="src/add-swift-support.js" />
+    <hook type="after_plugin_add" src="src/add-swift-support.js" />
+        <config-file target="config.xml" parent="/*">
+            <preference name="UseSwiftLanguageVersion" value="5" />
+            <feature name="ApperyioML">
+                <param name="ios-package" value="ApperyioML" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        
+
+        <config-file target="*-Info.plist" parent="Privacy - Camera Usage Description">
+            <string>This app will use camera to detect objects around you</string>
+        </config-file>
+        
+        <source-file src="src/ios/ApperyioML.swift" />
+        
+        <source-file src="src/ios/CameraFeed/CameraFeedManager.swift" />
+        <source-file src="src/ios/CameraFeed/PreviewView.swift" />
+        
+        <source-file src="src/ios/Extensions/CVPixelBufferExtension.swift" />
+        <source-file src="src/ios/Extensions/StringExtension.swift" />
+        <source-file src="src/ios/Extensions/UIColorExtension.swift" />
+        <source-file src="src/ios/Extensions/DecodableExtension.swift" />
+        
+        <source-file src="src/ios/ModelHandler/ModelDataHandler.swift" />
+        <source-file src="src/ios/ModelHandler/Helpers.swift" />
+
+        
+        <source-file src="src/ios/Views/CurvedView.swift" />
+        <source-file src="src/ios/Views/OverlayView.swift" />
+
+       <podspec>
+            <config>
+                <source url="https://cdn.cocoapods.org/"/>
+            </config>
+            <pods use-frameworks="true">
+                <pod name="TensorFlowLiteSwift" swift-version="5.0"/>
+
+            </pods>
+        </podspec>
+
+    </platform>
+    
+</plugin>

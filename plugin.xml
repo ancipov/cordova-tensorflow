@@ -25,19 +25,15 @@
         </config-file>
         
         <source-file src="src/ios/ApperyioML.swift" />
-        
         <source-file src="src/ios/CameraFeed/CameraFeedManager.swift" />
         <source-file src="src/ios/CameraFeed/PreviewView.swift" />
-        
         <source-file src="src/ios/Extensions/CVPixelBufferExtension.swift" />
         <source-file src="src/ios/Extensions/StringExtension.swift" />
         <source-file src="src/ios/Extensions/UIColorExtension.swift" />
         <source-file src="src/ios/Extensions/DecodableExtension.swift" />
-        
+        <source-file src="src/ios/Extensions/UIResponderExtension.swift" />
         <source-file src="src/ios/ModelHandler/ModelDataHandler.swift" />
         <source-file src="src/ios/ModelHandler/Helpers.swift" />
-
-        
         <source-file src="src/ios/Views/CurvedView.swift" />
         <source-file src="src/ios/Views/OverlayView.swift" />
 
@@ -47,7 +43,6 @@
             </config>
             <pods use-frameworks="true">
                 <pod name="TensorFlowLiteSwift" swift-version="5.0"/>
-
             </pods>
         </podspec>
 

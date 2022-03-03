@@ -1,10 +1,11 @@
 
-
 @objc(ApperyioML) class ApperyioML : CDVPlugin {
     
     //MARK: - UI
     var previewView: PreviewView!
     var overlayView: OverlayView!
+    private var pathType: PathType = .none
+    private var setPathId: String?
  
     // MARK: Instance Variables
     // Holds the results at any time
@@ -15,6 +16,18 @@
     // MARK: Controllers that manage functionality
     private var cameraFeedManager: CameraFeedManager?
     private var modelDataHandler: ModelDataHandler?
+    
+    @objc(setPath:)
+    func setPath(command: CDVInvokedUrlCommand) {
+        self.setPathId = command.callbackId
+        let args = command.arguments[0] as! Dictionary<String, String>
+        self.pathType = PathType.init(rawValue: args["type"] ?? PathType.none.rawValue) ?? .none
+        let picker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: UIDocumentPickerMode.open)
+        picker.delegate = self
+        let vc = self.webView.parentViewController
+        vc?.present(picker, animated: true)
+        
+    }
     
     /// Set TFLite model with camera view frame, and labels .txt
     @objc(setModelWithCamera:)
@@ -190,4 +203,18 @@ extension ApperyioML: CameraFeedManagerDelegate {
         self.commandDelegate!.send(pluginResult, callbackId: id)
     }
     
+}
+
+extension ApperyioML: UIDocumentPickerDelegate {
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        var filePath = urls[0].absoluteString
+        filePath = filePath.replacingOccurrences(of: "file://", with: "")//making url to file path
+        print(filePath)
+        UserDefaults.standard.set(filePath, forKey: self.pathType.rawValue)
+        if let id = setPathId {
+            let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: filePath)
+            self.commandDelegate!.send(pluginResult, callbackId: id)
+        }
+    }
 }

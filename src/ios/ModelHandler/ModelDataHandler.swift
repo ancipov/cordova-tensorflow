@@ -23,6 +23,27 @@ struct Result {
   let inferences: [Inference]
 }
 
+struct Output {
+    var result: [[String: Any]]
+    
+    init(result: Result) {
+        self.result = [[String: Any]]()
+        result.inferences.forEach { inference in
+            var item = [String: Any]()
+            item["className"] = inference.className
+            item["confidence"] = inference.confidence
+            
+            var rect = [String: Any]()
+            rect["x"] = inference.rect.minX
+            rect["y"] = inference.rect.minY
+            rect["width"] = inference.rect.width
+            rect["height"] = inference.rect.height
+            item["rect"] = rect
+            self.result.append(item)
+        }
+    }
+}
+
 /// Stores one formatted inference.
 struct Inference {
   let confidence: Float
@@ -86,14 +107,16 @@ class ModelDataHandler: NSObject {
 
   // MARK: - Initialization
     
-    init?(modelPath: String, fileInfoPath:String) {
+    init?(modelPath: String?, fileInfoPath: String?) {
+        let model = modelPath ?? UserDefaults.standard.string(forKey: PathType.modelPath.rawValue) ?? ""
+        let fileInfo = fileInfoPath ?? UserDefaults.standard.string(forKey: PathType.labelsPath.rawValue) ?? ""
         self.threadCount = 1
         var options = Interpreter.Options()
         options.threadCount = threadCount
         
         do {
           // Create the `Interpreter`.
-          interpreter = try Interpreter(modelPath: modelPath, options: options)
+          interpreter = try Interpreter(modelPath: model, options: options)
           // Allocate memory for the model's input `Tensor`s.
           try interpreter.allocateTensors()
         } catch let error {
@@ -101,7 +124,8 @@ class ModelDataHandler: NSObject {
           return nil
         }
         super.init()
-        loadLabels(filePath: fileInfoPath)
+        loadLabels(filePath: fileInfo)
+
     }
 
   /// A failable initializer for `ModelDataHandler`. A new instance is created if the model and

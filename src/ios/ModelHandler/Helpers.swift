@@ -15,11 +15,12 @@ class Settings {
     static let videoConfigurationError = "Video configuration error"
     static let sessionRunTimeErrorOccurred = "Session run time error occurred"
     static let sessionWasInterrupted = "Session was interrupted"
+    
 }
 
 struct InputWithCameraView: Codable {
-    let modelPath: String
-    let labelsPath: String
+    var modelPath: String?
+    var labelsPath: String?
     let margins: Margins
 }
 
@@ -29,4 +30,10 @@ struct Margins: Codable {
     var top: Int = 0
     var bottom: Int = 0
     let height: Int?
+}
+
+enum PathType: String {
+    case modelPath = "modelPath"
+    case labelsPath = "labelsPath"
+    case none = "none"
 }

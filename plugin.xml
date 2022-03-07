@@ -4,9 +4,20 @@
     <js-module name="ApperyioML" src="www/ApperyioML.js">
         <clobbers target="ApperyioML" />
     </js-module>
+    <author>Exadel</author>
+    
+    <license>MIT</license>
+    
+    <engines>
+        <engine name="cordova" version=">=3.5.0"/>
+        <!--engine name="cordova-android" version=">=4" /-->
+        <engine name="cordova-plugman" version=">=4.2.0"/>
+      </engines>
     
     <hook type="before_plugin_install" src="src/add-swift-support.js" />
 
+    <repo>https://github.com/ancipov/cordova-tensorflow.git</repo>
+    
     <platform name="ios">
         
     <hook type="after_platform_add" src="src/add-swift-support.js" />

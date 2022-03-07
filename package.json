@@ -6,7 +6,8 @@
   "cordova": {
     "id": "exadel-tf-lite",
     "platforms": [
-    "ios"
+        "android",
+        "ios"
     ]
 
   },
@@ -23,5 +24,12 @@
   ],
   "author": "Apperyio",
   "repo": "https://github.com/ancipov/cordova-tensorflow.git",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/ancipov/cordova-tensorflow"
+    },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
   "license": "MIT"
 }

@@ -20,7 +20,7 @@
         </config-file>
         
 
-        <config-file target="*-Info.plist" parent="Privacy - Camera Usage Description">
+        <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
             <string>This app will use camera to detect objects around you</string>
         </config-file>
         

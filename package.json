@@ -21,6 +21,7 @@
   "keywords": [
     "ecosystem:cordova"
   ],
-  "author": "",
-  "license": "ISC"
+  "author": "Apperyio",
+  "repo": "https://github.com/ancipov/cordova-tensorflow.git",
+  "license": "MIT"
 }

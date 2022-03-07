@@ -1,4 +1,3 @@
-
 @objc(ApperyioML) class ApperyioML : CDVPlugin {
     
     //MARK: - UI
@@ -22,7 +21,7 @@
         self.setPathId = command.callbackId
         let args = command.arguments[0] as! Dictionary<String, String>
         self.pathType = PathType.init(rawValue: args["type"] ?? PathType.none.rawValue) ?? .none
-        let picker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: UIDocumentPickerMode.open)
+        let picker = UIDocumentPickerViewController(documentTypes: ["public.data"], in: UIDocumentPickerMode.import)
         picker.delegate = self
         let vc = self.webView.parentViewController
         vc?.present(picker, animated: true)

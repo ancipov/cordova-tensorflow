@@ -285,7 +285,7 @@ class ModelDataHandler: NSObject {
   /// Loads the labels from the labels file and stores them in the `labels` property.
 
     private func loadLabels(filePath: String) {
-        guard let fileURL = URL(string: filePath) else { return }
+        guard let fileURL = URL(string: "file:/" + filePath) else { return }
         do {
           let contents = try String(contentsOf: fileURL, encoding: .utf8)
           labels = contents.components(separatedBy: .newlines)
